@@ -18,6 +18,7 @@ function initMap() {
         	info: locations[i].content
         });
 
+
             marker.addListener('click', function() {
 
                 populateInfoWindow(this, infoWindow);
@@ -56,7 +57,7 @@ var locations = [
 	{
 		name : 'Durham Performing Arts Center',
 		location : {lat: 35.9932, lng: -78.9022},
-		content: "Dpac has tons of great broadway shows!"
+		content: "Dpac h as tons of great broadway shows!"
 	},
 	{
 		name : 'Elmo\'s Diner',
@@ -85,7 +86,6 @@ var ViewModel = function() {
 	locations.forEach(function(place) {
 		self.allPlaces.push(new Place(place));
 	});
-
 
 	self.visiblePlaces = ko.observableArray();
 
@@ -118,9 +118,11 @@ var ViewModel = function() {
 		this.name = data.name;
 		this.location = data.location;
 
-		this.marker = null;
+		this.marker = data.marker;
 	}
 
 };
 
-ko.applyBindings(new ViewModel());
+var viewModel = new ViewModel();
+
+ko.applyBindings(viewModel);
