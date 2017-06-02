@@ -53,8 +53,8 @@ function initMap() {
         		for(var i = 0; i<articleList.length; i++) {
         			articleStr = articleList[i];
         			var url = "http://en.wikipedia.org/wiki/" + articleStr;
-        			marker[i].wikiUrl = url;
         		}
+        		marker.wikiUrl = url;
         	}
         });
    
