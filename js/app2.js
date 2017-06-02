@@ -43,18 +43,17 @@ function initMap() {
                 }
             } 
 
-        var wikiUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + marker.title + "&format=json&callback=wikiCallback";
+        var wikiUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + locations[i].name + "&format=json&callback=wikiCallback";
 
         $.ajax({
         	url: wikiUrl,
         	dataType: "jsonp",
         	success: function( response ) {
-        		var articleList = response[3];
-        		for(var i = 0; i<articleList.length; i++) {
-        			articleStr = articleList[i];
-        			var url = "http://en.wikipedia.org/wiki/" + articleStr;
-        		}
+        		for(i=0; i <locations.length; i++) {
+        		var articleList = response[3][0];
+        		var url = articleList;
         		marker.wikiUrl = url;
+        		}
         	}
         });
    
