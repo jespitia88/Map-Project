@@ -1,6 +1,5 @@
 //global variable
 var map;
-var url;
 
 function initMap() {
 
@@ -16,8 +15,7 @@ function initMap() {
         	position: locations[i].location,
         	map: map,
         	title: locations[i].name,
-        	info: locations[i].content,
-        	wiki: locations[i].url
+        	info: locations[i].content
         });
 
 			locations[i].marker = marker;
@@ -31,7 +29,7 @@ function initMap() {
                 if (infoWindow.marker != marker) {
                     infoWindow.marker = marker;
 
-                    infoWindow.setContent('<div class="title">' + marker.title + '</div>' + '<div class="info">' + marker.info + '</div>'  + '<a href ="' + marker.wiki + '">' + "Wikipedia" + '</a>');
+                    infoWindow.setContent('<div class="title">' + marker.title + '</div>' + marker.info);
        
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function() {
@@ -44,27 +42,12 @@ function initMap() {
                 }
             } 
 
-        var wikiUrl = "http://en.wikipedia.org/w/api.php?action=opensearch&search=" + marker.title + "&format=json&callback=wikiCallback";
-
-        $.ajax({
-        	url: wikiUrl,
-        	dataType: "jsonp",
-        	success: function( response ) {
-        		var articleList = response[3];
-
-        		for(var i = 0; i<articleList.length; i++) {
-        			articleStr = articleList[i];
-        			var url = "http://en.wikipedia.org/wiki/" + articleStr;
-        		}
-        	}
-        });
-   
-    }
+   }
 
     var viewModel = new ViewModel();
 	ko.applyBindings(viewModel);
 
-};
+}
 
 
 //Model
@@ -78,7 +61,7 @@ var locations = [
 	{
 		name : 'Durham Performing Arts Center',
 		location : {lat: 35.9932, lng: -78.9022},
-		content: "Dpac has tons of great broadway shows!"
+		content: "Dpac h as tons of great broadway shows!"
 	},
 	{
 		name : 'Counter Culture Coffee',
@@ -139,7 +122,6 @@ var ViewModel = function() {
 		this.name = data.name;
 		this.location = data.location;
 		this.marker = data.marker;
-		this.url = data.url;
 	}
 
 };
