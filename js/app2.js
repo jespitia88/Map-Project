@@ -17,7 +17,6 @@ function initMap() {
         	map: map,
         	title: locations[i].name,
         	info: locations[i].content,
-        	wiki: locations[i].url
         });
 
 			locations[i].marker = marker;
@@ -31,7 +30,7 @@ function initMap() {
                 if (infoWindow.marker != marker) {
                     infoWindow.marker = marker;
 
-                    infoWindow.setContent('<div class="title">' + marker.title + '</div>' + '<div class="info">' + marker.info + '</div>'  + '<a href ="' + marker.wiki + '">' + "Wikipedia" + '</a>');
+                    infoWindow.setContent('<div class="title">' + marker.title + '</div>' + '<div class="info">' + marker.info + '</div>'  + '<a title="+' + marker.wikiUrl + '" href="' + marker.wikiUrl + '">' + "Wikipedia" + '</a>');
        
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                     setTimeout(function() {
@@ -51,10 +50,10 @@ function initMap() {
         	dataType: "jsonp",
         	success: function( response ) {
         		var articleList = response[3];
-
         		for(var i = 0; i<articleList.length; i++) {
         			articleStr = articleList[i];
         			var url = "http://en.wikipedia.org/wiki/" + articleStr;
+        			marker[i].wikiUrl = url;
         		}
         	}
         });
@@ -91,9 +90,9 @@ var locations = [
 		content: "It's a great day for some ice cream!"
 	},
 	{
-		name : 'Motorco',
-		location : {lat: 36.0036, lng: -78.9004},
-		content: "Local venue, local shows!"
+		name : 'Durham School of the Arts',
+		location : {lat: 36.0023, lng: -78.9061},
+		content: "Great public school dedicated to the arts!"
 	}
 
 ];
