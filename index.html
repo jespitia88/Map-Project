@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta charset="utf-8">
+  <meta name="mobile-web-app-capable" content="yes">
+
+    <style type="text/css">
+     html, body { height: 100%; margin: 0; padding: 0; }
+     #map { height: 100%; width: 80%; float: left;}
+     #filter { width: 20%; float: right; text-align: center;}
+    </style>
+
+   <title>Durham Neighborhood Map</title>
+ </head>
+ <body>
+  <div id="map"></div>
+
+  <div id="filter"> 
+    <input type="search" placeholder="filter search..." data-bind="textInput: userInput, event: {keyup: filterMarkers}">
+
+    <ul id="list-view" data-bind="foreach: visiblePlaces">
+      <li data-bind="text: name, click: $parent.showLocation"></li>
+    </ul>
+  </div>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="js/knockout.js"></script>
+   <script src="js/app.js"></script>
+   <script>
+    //brings up error message if google maps does not load.
+	function googleError() {
+    	alert("Map could not be loaded, please try again.");
+	};		
+   </script>
+
+   <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBetH10txupVtsVLvgznV_zmk1KOvGlbB4&v=3&callback=initMap" onerror="googleError()"></script>
+ </body>
+</html>
